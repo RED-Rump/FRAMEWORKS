@@ -246,5 +246,47 @@ public class GameSession {
                 ", currentQuestion=" + (currentQuestionIndex + 1) +
                 "/" + questions.size() +
                 '}';
+        
+        // Add to GameSession class
+
+// Handle player disconnection
+public synchronized void handlePlayerDisconnect(String playerId) {
+    removePlayer(playerId);
+    
+    // If too few players remain, end game
+    if (players.size() < 2 && 
+        (currentState == GameState.QUESTION_DISPLAYED || 
+         currentState == GameState.WAITING_FOR_ANSWERS)) {
+        System.out.println("Too few players remaining. Ending game.");
+        endGame();
+    }
+}
+
+// Handle timeout scenario
+public synchronized void handleTimeout() {
+    if (currentState == GameState.QUESTION_DISPLAYED || 
+        currentState == GameState.WAITING_FOR_ANSWERS) {
+        System.out.println("Time's up for question " + (currentQuestionIndex + 1));
+        endCurrentRound();
+    }
+}
+
+// Pause game (if needed)
+public synchronized void pauseGame() {
+    if (currentState == GameState.QUESTION_DISPLAYED) {
+        scheduler.shutdownNow();
+        currentState = GameState.WAITING;
+        System.out.println("Game paused");
+    }
+}
+
+// Resume game
+public synchronized void resumeGame() {
+    if (currentState == GameState.WAITING) {
+        scheduler = Executors.newScheduledThreadPool(1);
+        displayNextQuestion();
+        System.out.println("Game resumed");
+    }
+}
     }
 }
