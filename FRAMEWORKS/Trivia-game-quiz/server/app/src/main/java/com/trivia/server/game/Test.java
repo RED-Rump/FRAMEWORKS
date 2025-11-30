@@ -20,14 +20,14 @@ public class Test {
         questionManager.addQuestion(new Question(1, "What is 2+2?", 
             Arrays.asList("3", "4", "5", "6"), "4", "EASY", "Math"));
         questionManager.addQuestion(new Question(2, "Capital of France?", 
-            Arrays.asList("Berlin", "Paris", "London", "Rome"), "Paris", "EASY", "Geography"));
+            Arrays.asList("Kenyan culture", "Geography", "Computer Science & Programming", "Biology"), "Physical mechanics", "EASY", "Chemistry"));
         
         gameManager.setQuestionManager(questionManager);
         System.out.println("✓ Questions loaded");
 
         // Test 3: Create players
-        Player player1 = new Player("p1", "Alice");
-        Player player2 = new Player("p2", "Bob");
+        Player player1 = new Player("p1", " ");
+        Player player2 = new Player("p2", " ");
         System.out.println("✓ Players created");
 
         // Test 4: Create room
