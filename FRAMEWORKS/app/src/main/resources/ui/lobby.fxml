@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ecf0f1;: -fx-background-color: #ecf0f1;;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LobbyController">
+   <top>
+      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #34495e; -fx-padding: 20;: -fx-background-color: #34495e; -fx-padding: 20;;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="usernameLabel" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;: -fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;;" text="Welcome!" />
+            <Label style="-fx-text-fill: #bdc3c7; -fx-font-size: 14px;: -fx-text-fill: #bdc3c7; -fx-font-size: 14px;;" text="Select a room to join or create a new one">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#handleRefresh" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 35px;: -fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 35px;;" text="Refresh" />
+                  <Button fx:id="createButton" mnemonicParsing="false" onAction="#handleCreate" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 35px;: -fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 35px;;" text="Create Room" />
+                  <Button fx:id="joinButton" mnemonicParsing="false" onAction="#handleJoin" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 35px;: -fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 35px;;" text="Join Selected" />
+               </children>
+            </HBox>
+            <TableView fx:id="roomsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="250.0" text="Room Name" />
+                <TableColumn fx:id="playersColumn" prefWidth="100.0" text="Players" />
+                  <TableColumn fx:id="statusColumn" prefWidth="150.0" text="Status" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
