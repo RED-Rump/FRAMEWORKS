@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ecf0f1;: -fx-background-color: #ecf0f1;;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.GameController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: #34495e; -fx-padding: 15;: -fx-background-color: #34495e; -fx-padding: 15;;" BorderPane.alignment="CENTER_LEFT">
+         <children>
+            <Label fx:id="roomTitleLabel" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;: -fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;;" text="Game Room" HBox.hgrow="ALWAYS" />
+            <Button fx:id="leaveButton" mnemonicParsing="false" onAction="#handleLeave" style="-fx-background-color: #e74c3c; -fx-text-fill: white;: -fx-background-color: #e74c3c; -fx-text-fill: white;;" text="Leave Room" />
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="200.0" spacing="10.0" style="-fx-background-color: white; -fx-padding: 15;: -fx-background-color: white; -fx-padding: 15;;" BorderPane.alignment="CENTER">
+         <children>
+            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;: -fx-font-size: 16px; -fx-font-weight: bold;;" text="Players" />
+            <ListView fx:id="playersListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="waitingPane" prefHeight="200.0" prefWidth="100.0" spacing="20.0" StackPane.alignment="CENTER">
+               <padding>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+               </padding>
+               <children>
+                  <Label style="-fx-font-size: 24px; -fx-font-weight: bold;: -fx-font-size: 24px; -fx-font-weight: bold;;" text="Waiting for players..." />
+                  <Label style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;: -fx-font-size: 14px; -fx-text-fill: #7f8c8d;;" text="Game will start when the host clicks Start Game" />
+                  <Button fx:id="startButton" mnemonicParsing="false" onAction="#handleStart" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 18px; -fx-pref-width: 200px; -fx-pref-height: 50px;: -fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 18px; -fx-pref-width: 200px; -fx-pref-height: 50px;;" text="Start Game" />
+               </children>
+            </VBox>
+            <VBox fx:id="gamePane" prefHeight="200.0" prefWidth="100.0" spacing="20.0" StackPane.alignment="CENTER">
+               <padding>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+               </padding>
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Label fx:id="questionNumberLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;: -fx-font-size: 18px; -fx-font-weight: bold;;" text="Question 1 of 10" />
+                        <Label fx:id="timerLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;: -fx-font-size: 18px; -fx-font-weight: bold;;" text="Time: 15s" />
+                        <Label fx:id="categoryLabel" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;: -fx-font-size: 14px; -fx-text-fill: #7f8c8d;;" text="Category: General" />
+                        <VBox alignment="CENTER" maxWidth="600.0" prefHeight="200.0" prefWidth="100.0" spacing="15.0" style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10;: -fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10;;">
+                           <children>
+                              <Label fx:id="questionLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;: -fx-font-size: 18px; -fx-font-weight: bold;;" text="Question text will appear here" wrapText="true" />
+                           </children>
+                        </VBox>
+                        <VBox maxWidth="500.0" prefHeight="200.0" prefWidth="100.0" spacing="12.0">
+                           <children>
+                              <RadioButton fx:id="option1" mnemonicParsing="false" style="-fx-font-size: 14px;: -fx-font-size: 14px;;" text="Option 1">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="answerGroup" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="option2" mnemonicParsing="false" style="-fx-font-size: 14px;: -fx-font-size: 14px;;" text="Option 2" toggleGroup="$answerGroup" />
+                              <RadioButton fx:id="option3" mnemonicParsing="false" style="-fx-font-size: 14px;: -fx-font-size: 14px;;" text="Option 3" toggleGroup="$answerGroup" />
+                              <RadioButton fx:id="option4" mnemonicParsing="false" style="-fx-font-size: 14px;: -fx-font-size: 14px;;" text="Option 4" toggleGroup="$answerGroup" />
+                              <Button fx:id="submitButton" mnemonicParsing="false" onAction="#handleSubmit" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 16px; -fx-pref-width: 200px; -fx-pref-height: 40px;: -fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 16px; -fx-pref-width: 200px; -fx-pref-height: 40px;;" text="Submit Answer" />
+                              <Label fx:id="resultLabel" maxWidth="500.0" style="-fx-font-size: 14px; -fx-text-fill: #27ae60;: -fx-font-size: 14px; -fx-text-fill: #27ae60;;" text="Result will appear here" wrapText="true" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>
