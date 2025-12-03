@@ -1,3 +1,311 @@
 [
-  { "question": "What is 2+2?", "options": ["3","4","5"], "correctAnswer": "4" }
+  
+  {
+    "category": "World Capitals",
+    "question": "What is the capital of Kenya?",
+    "options": ["Mombasa", "Kisumu", "Nairobi", "Nakuru"],
+    "correctAnswer": "Nairobi"
+  },
+  {
+    "category": "World Capitals",
+    "question": "What is the capital of Canada?",
+    "options": ["Toronto", "Vancouver", "Ottawa", "Montreal"],
+    "correctAnswer": "Ottawa"
+  },
+  {
+    "category": "World Capitals",
+    "question": "What is the capital of Japan?",
+    "options": ["Seoul", "Beijing", "Tokyo", "Kyoto"],
+    "correctAnswer": "Tokyo"
+  },
+  {
+    "category": "World Capitals",
+    "question": "What is the capital of Brazil?",
+    "options": ["Rio de Janeiro", "Sao Paulo", "Brasilia", "Buenos Aires"],
+    "correctAnswer": "Brasilia"
+  },
+  {
+    "category": "World Capitals",
+    "question": "What is the capital of Australia?",
+    "options": ["Sydney", "Melbourne", "Canberra", "Perth"],
+    "correctAnswer": "Canberra"
+  },
+  {
+    "category": "World Capitals",
+    "question": "What is the capital of France?",
+    "options": ["Lyon", "Marseille", "Paris", "Nice"],
+    "correctAnswer": "Paris"
+  },
+  {
+    "category": "World Capitals",
+    "question": "What is the capital of Egypt?",
+    "options": ["Alexandria", "Cairo", "Giza", "Luxor"],
+    "correctAnswer": "Cairo"
+  },
+  {
+    "category": "World Capitals",
+    "question": "What is the capital of Germany?",
+    "options": ["Munich", "Frankfurt", "Berlin", "Hamburg"],
+    "correctAnswer": "Berlin"
+  },
+  {
+    "category": "World Capitals",
+    "question": "What is the capital of South Korea?",
+    "options": ["Pyongyang", "Seoul", "Busan", "Incheon"],
+    "correctAnswer": "Seoul"
+  },
+  {
+    "category": "World Capitals",
+    "question": "What is the capital of Nigeria?",
+    "options": ["Lagos", "Abuja", "Kano", "Ibadan"],
+    "correctAnswer": "Abuja"
+  },
+
+
+  {
+    "category": "Soccer",
+    "question": "Which country won the 2018 FIFA World Cup?",
+    "options": ["Brazil", "Germany", "France", "Argentina"],
+    "correctAnswer": "France"
+  },
+  {
+    "category": "Soccer",
+    "question": "Who has won the most Ballon d'Or awards?",
+    "options": ["Cristiano Ronaldo", "Lionel Messi", "Pele", "Maradona"],
+    "correctAnswer": "Lionel Messi"
+  },
+  {
+    "category": "Soccer",
+    "question": "Which club is known as 'The Red Devils'?",
+    "options": ["Liverpool", "Manchester United", "Arsenal", "AC Milan"],
+    "correctAnswer": "Manchester United"
+  },
+  {
+    "category": "Soccer",
+    "question": "How long is a standard soccer match?",
+    "options": ["45 minutes", "60 minutes", "90 minutes", "100 minutes"],
+    "correctAnswer": "90 minutes"
+  },
+  {
+    "category": "Soccer",
+    "question": "Which African country was the first to reach a World Cup semi-final?",
+    "options": ["Nigeria", "Ghana", "Morocco", "Senegal"],
+    "correctAnswer": "Morocco"
+  },
+  {
+    "category": "Soccer",
+    "question": "What is the shape of a soccer ball pattern mostly described as?",
+    "options": ["Icosahedron", "Dodecahedron", "Sphere", "Truncated Icosahedron"],
+    "correctAnswer": "Truncated Icosahedron"
+  },
+  {
+    "category": "Soccer",
+    "question": "Which player is nicknamed 'CR7'?",
+    "options": ["Ronaldinho", "Cristiano Ronaldo", "Ronaldo Nazario", "Ribery"],
+    "correctAnswer": "Cristiano Ronaldo"
+  },
+  {
+    "category": "Soccer",
+    "question": "Who is the top scorer in Premier League history?",
+    "options": ["Wayne Rooney", "Alan Shearer", "Thierry Henry", "Harry Kane"],
+    "correctAnswer": "Alan Shearer"
+  },
+  {
+    "category": "Soccer",
+    "question": "Which country hosted the 2010 FIFA World Cup?",
+    "options": ["Brazil", "South Africa", "Germany", "Russia"],
+    "correctAnswer": "South Africa"
+  },
+  {
+    "category": "Soccer",
+    "question": "What color card signifies a player is sent off?",
+    "options": ["Yellow", "Blue", "Red", "Black"],
+    "correctAnswer": "Red"
+  },
+
+ 
+  {
+    "category": "Kenya",
+    "question": "What is the highest mountain in Kenya?",
+    "options": ["Mt. Kilimanjaro", "Mt. Elgon", "Mt. Kenya", "Mt. Longonot"],
+    "correctAnswer": "Mt. Kenya"
+  },
+  {
+    "category": "Kenya",
+    "question": "Who was the first President of Kenya?",
+    "options": ["Daniel Moi", "Jomo Kenyatta", "Mwai Kibaki", "Uhuru Kenyatta"],
+    "correctAnswer": "Jomo Kenyatta"
+  },
+  {
+    "category": "Kenya",
+    "question": "Which city is known as the 'City in the Sun'?",
+    "options": ["Mombasa", "Kisumu", "Nairobi", "Nakuru"],
+    "correctAnswer": "Nairobi"
+  },
+  {
+    "category": "Kenya",
+    "question": "What is the currency of Kenya?",
+    "options": ["Dollar", "Kwacha", "Shilling", "Rand"],
+    "correctAnswer": "Shilling"
+  },
+  {
+    "category": "Kenya",
+    "question": "Which famous marathon runner set the under-2-hour record?",
+    "options": ["David Rudisha", "Eliud Kipchoge", "Kipchoge Keino", "Paul Tergat"],
+    "correctAnswer": "Eliud Kipchoge"
+  },
+  {
+    "category": "Kenya",
+    "question": "Which lake in Kenya is shared with Uganda and Tanzania?",
+    "options": ["Lake Turkana", "Lake Nakuru", "Lake Victoria", "Lake Naivasha"],
+    "correctAnswer": "Lake Victoria"
+  },
+  {
+    "category": "Kenya",
+    "question": "What does 'Hakuna Matata' mean?",
+    "options": ["Hello friend", "No worries", "Good morning", "Thank you"],
+    "correctAnswer": "No worries"
+  },
+  {
+    "category": "Kenya",
+    "question": "Which coastal city is famous for Fort Jesus?",
+    "options": ["Malindi", "Lamu", "Mombasa", "Kilifi"],
+    "correctAnswer": "Mombasa"
+  },
+  {
+    "category": "Kenya",
+    "question": "When is Madaraka Day celebrated?",
+    "options": ["May 1st", "June 1st", "October 20th", "December 12th"],
+    "correctAnswer": "June 1st"
+  },
+  {
+    "category": "Kenya",
+    "question": "Which animal is NOT part of the 'Big Five'?",
+    "options": ["Lion", "Leopard", "Cheetah", "Buffalo"],
+    "correctAnswer": "Cheetah"
+  },
+
+  
+  {
+    "category": "Computer Science",
+    "question": "What does CPU stand for?",
+    "options": ["Central Process Unit", "Central Processing Unit", "Computer Personal Unit", "Central Processor Unit"],
+    "correctAnswer": "Central Processing Unit"
+  },
+  {
+    "category": "Computer Science",
+    "question": "Which language is primarily used for Android development?",
+    "options": ["Swift", "Kotlin", "PHP", "Ruby"],
+    "correctAnswer": "Kotlin"
+  },
+  {
+    "category": "Computer Science",
+    "question": "What does HTML stand for?",
+    "options": ["Hyper Text Markup Language", "High Tech Modern Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"],
+    "correctAnswer": "Hyper Text Markup Language"
+  },
+  {
+    "category": "Computer Science",
+    "question": "Which symbol is used for comments in Java?",
+    "options": ["#", "//", "<!--", "%"],
+    "correctAnswer": "//"
+  },
+  {
+    "category": "Computer Science",
+    "question": "What is the binary representation of the number 5?",
+    "options": ["100", "110", "101", "011"],
+    "correctAnswer": "101"
+  },
+  {
+    "category": "Computer Science",
+    "question": "Which of these is a database management system?",
+    "options": ["MySQL", "Python", "Linux", "Apache"],
+    "correctAnswer": "MySQL"
+  },
+  {
+    "category": "Computer Science",
+    "question": "Who is known as the father of the computer?",
+    "options": ["Alan Turing", "Charles Babbage", "Bill Gates", "Steve Jobs"],
+    "correctAnswer": "Charles Babbage"
+  },
+  {
+    "category": "Computer Science",
+    "question": "Which data structure follows LIFO (Last In First Out)?",
+    "options": ["Queue", "Array", "Stack", "Tree"],
+    "correctAnswer": "Stack"
+  },
+  {
+    "category": "Computer Science",
+    "question": "What port is standard for HTTP?",
+    "options": ["21", "80", "443", "8080"],
+    "correctAnswer": "80"
+  },
+  {
+    "category": "Computer Science",
+    "question": "Which company owns Java?",
+    "options": ["Microsoft", "Google", "Oracle", "Apple"],
+    "correctAnswer": "Oracle"
+  },
+
+
+  {
+    "category": "Science",
+    "question": "What is the powerhouse of the cell?",
+    "options": ["Nucleus", "Ribosome", "Mitochondria", "Cytoplasm"],
+    "correctAnswer": "Mitochondria"
+  },
+  {
+    "category": "Science",
+    "question": "What is the chemical symbol for Gold?",
+    "options": ["Au", "Ag", "Fe", "Go"],
+    "correctAnswer": "Au"
+  },
+  {
+    "category": "Science",
+    "question": "What is the speed of light approx?",
+    "options": ["300,000 km/s", "150,000 km/s", "1,000 km/s", "3,000 km/s"],
+    "correctAnswer": "300,000 km/s"
+  },
+  {
+    "category": "Science",
+    "question": "Newton's First Law is also known as the law of?",
+    "options": ["Gravity", "Inertia", "Action-Reaction", "Acceleration"],
+    "correctAnswer": "Inertia"
+  },
+  {
+    "category": "Science",
+    "question": "Which planet is known as the Red Planet?",
+    "options": ["Venus", "Mars", "Jupiter", "Saturn"],
+    "correctAnswer": "Mars"
+  },
+  {
+    "category": "Science",
+    "question": "What gas do plants absorb during photosynthesis?",
+    "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+    "correctAnswer": "Carbon Dioxide"
+  },
+  {
+    "category": "Science",
+    "question": "What is the boiling point of water at sea level?",
+    "options": ["50°C", "90°C", "100°C", "120°C"],
+    "correctAnswer": "100°C"
+  },
+  {
+    "category": "Science",
+    "question": "Which organ pumps blood throughout the human body?",
+    "options": ["Brain", "Lungs", "Liver", "Heart"],
+    "correctAnswer": "Heart"
+  },
+  {
+    "category": "Science",
+    "question": "What force pulls objects toward the earth?",
+    "options": ["Magnetism", "Friction", "Gravity", "Tension"],
+    "correctAnswer": "Gravity"
+  },
+  {
+    "category": "Science",
+    "question": "What implies 'Action equals Reaction'?",
+    "options": ["Newton's 1st Law", "Newton's 2nd Law", "Newton's 3rd Law", "Einstein's Theory"],
+    "correctAnswer": "Newton's 3rd Law"
+  }
 ]

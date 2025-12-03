@@ -10,7 +10,8 @@ public class App {
         System.out.println("Initializing Trivia Server...");
         
         // 1. Load Questions
-        // QuestionManager qm = new QuestionManager(); // Uncomment when ready
+        QuestionManager qm = new QuestionManager();
+        System.out.println("Questions loaded: " + qm.getQuestions().size());
         
         // 2. Start Network
         ServerNetworkManager server = new ServerNetworkManager();
