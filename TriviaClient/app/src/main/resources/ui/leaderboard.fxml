@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="500.0" prefWidth="700.0" spacing="20.0" 
+      xmlns="http://javafx.com/javafx/25" 
+      xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.example.TriviaClient.controllers.LeaderboardController">
+   
+   <padding>
+      <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+   </padding>
+   
+   <children>
+      <Label style="-fx-text-fill: #f39c12; -fx-font-size: 36px; -fx-font-weight: bold;" 
+             text="🏆 Game Over! 🏆" />
+      
+      <Label fx:id="titleLabel" style="-fx-text-fill: white; -fx-font-size: 20px;" 
+             text="Final Results" />
+      
+      <VBox spacing="10.0" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10;">
+         <children>
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Leaderboard" />
+            
+            <TableView fx:id="leaderboardTable" prefHeight="300.0">
+              <columns>
+                <TableColumn fx:id="rankColumn" prefWidth="80.0" text="Rank" />
+                <TableColumn fx:id="usernameColumn" prefWidth="250.0" text="Player" />
+                <TableColumn fx:id="scoreColumn" prefWidth="150.0" text="Score" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+      
+      <Button fx:id="backToLobbyButton" mnemonicParsing="false" onAction="#handleBackToLobby" 
+              style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 16px; -fx-pref-width: 200px; -fx-pref-height: 40px; -fx-cursor: hand;" 
+              text="Back to Lobby" />
+   </children>
+   
+   <style>
+      -fx-background-color: #2c3e50;
+   </style>
+</VBox>
