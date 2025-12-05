@@ -1,5 +1,10 @@
-# Ignore Gradle project-specific cache directory
-.gradle
+# Gradle build caches and outputs (all modules)
+**/.gradle/
+**/build/
 
-# Ignore Gradle build output directory
-build
+# Compiled bytecode
+**/bin/
+**/*.class
+
+# IDE/editor artifacts
+.vscode/

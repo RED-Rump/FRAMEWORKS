@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Trivia Game - Play Now!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .emoji {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            text-align: left;
+        }
+        
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .info-box p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .feature {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .feature-icon {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+        }
+        
+        .feature-name {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px 30px;
+            font-size: 1.05em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn-secondary:hover {
+            background: #f5f5f5;
+            transform: translateY(-2px);
+        }
+        
+        .connection-info {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .connection-info strong {
+            color: #e65100;
+        }
+        
+        .game-link {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            color: #333;
+            font-size: 0.9em;
+        }
+        
+        .copy-btn {
+            padding: 8px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85em;
+            margin-top: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+        
+        .copy-btn.copied {
+            background: #4caf50;
+        }
+        
+        .footer {
+            color: #999;
+            font-size: 0.85em;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .status {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .status.success {
+            background: #c8e6c9;
+            color: #2e7d32;
+            display: block;
+        }
+        
+        .status.error {
+            background: #ffcdd2;
+            color: #c62828;
+            display: block;
+        }
+        
+        .requirement {
+            margin: 8px 0;
+            color: #555;
+            text-align: left;
+        }
+        
+        .requirement::before {
+            content: "✓ ";
+            color: #4caf50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">🎮</div>
+        <h1>Trivia Game</h1>
+        <p class="subtitle">Play with friends and test your knowledge!</p>
+        
+        <div class="info-box">
+            <h3>📋 How to Play</h3>
+            <p>✓ Create or join a game room</p>
+            <p>✓ Answer 10 trivia questions</p>
+            <p>✓ Compete with other players</p>
+            <p>✓ Check the leaderboard</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">👥</div>
+                <div class="feature-name">Multiplayer</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-name">Real-time</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🏆</div>
+                <div class="feature-name">Rankings</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📱</div>
+                <div class="feature-name">Any Device</div>
+            </div>
+        </div>
+        
+        <div id="statusMessage" class="status"></div>
+        
+        <div class="connection-info">
+            <strong>ℹ️ Server Connection:</strong><br>
+            Make sure the game server is running on your network.<br>
+            <div id="serverStatus" style="margin-top: 8px; color: #d84315;">
+                🔴 Checking connection...
+            </div>
+        </div>
+        
+        <div class="button-group">
+            <button class="btn btn-primary" onclick="playGame()">
+                ▶️ Play Now
+            </button>
+            <button class="btn btn-secondary" onclick="copyLink()">
+                📋 Copy Link
+            </button>
+        </div>
+        
+        <div class="game-link">
+            <strong>Share this link with friends:</strong><br><br>
+            <span id="gameUrl"></span>
+            <button class="copy-btn" onclick="copyGameLink()">Copy Link</button>
+        </div>
+        
+        <div class="info-box">
+            <h3>🌐 Connection Details</h3>
+            <div class="requirement">Server: <strong>localhost</strong> or <strong id="hostDisplay">your-server-ip</strong></div>
+            <div class="requirement">Port: <strong>8081</strong></div>
+            <div class="requirement">Browser: Chrome, Firefox, Safari, or Edge</div>
+        </div>
+        
+        <div class="footer">
+            <p>🎯 Challenge your friends and become the trivia champion!</p>
+            <p style="margin-top: 8px; color: #bbb; font-size: 0.8em;">
+                Need help? Make sure the server is running at ws://localhost:8081
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function getGameUrl() {
+            // Get current location or default to localhost
+            const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+            const host = window.location.hostname || 'localhost';
+            const port = 8081;
+            const clientUrl = window.location.origin + '/web-client/index.html';
+            return clientUrl;
+        }
+        
+        function displayGameUrl() {
+            const url = getGameUrl();
+            document.getElementById('gameUrl').textContent = url;
+            document.getElementById('hostDisplay').textContent = window.location.hostname || 'localhost';
+        }
+        
+        function playGame() {
+            // Redirect to the game client
+            window.location.href = 'index.html';
+        }
+        
+        function copyLink() {
+            const url = getGameUrl();
+            navigator.clipboard.writeText(url).then(() => {
+                showStatus('Link copied to clipboard! 📋', 'success');
+            }).catch(() => {
+                showStatus('Failed to copy link. Try manual copy.', 'error');
+            });
+        }
+        
+        function copyGameLink() {
+            const url = document.getElementById('gameUrl').textContent;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                showStatus('Failed to copy link', 'error');
+            });
+        }
+        
+        function checkServerConnection() {
+            // Try to connect to WebSocket server
+            const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+            const wsUrl = `${protocol}://localhost:8081`;
+            
+            try {
+                const ws = new WebSocket(wsUrl);
+                
+                ws.onopen = () => {
+                    document.getElementById('serverStatus').innerHTML = '🟢 <strong>Server is online!</strong> Ready to play.';
+                    document.getElementById('serverStatus').style.color = '#2e7d32';
+                    ws.close();
+                };
+                
+                ws.onerror = () => {
+                    document.getElementById('serverStatus').innerHTML = '🔴 <strong>Server offline</strong><br>Make sure the game server is running.';
+                    document.getElementById('serverStatus').style.color = '#d84315';
+                };
+                
+                ws.onclose = () => {
+                    // Connection was closed (either successfully or due to error)
+                };
+            } catch (e) {
+                document.getElementById('serverStatus').innerHTML = '🔴 <strong>Cannot connect</strong><br>Check your server is running.';
+            }
+        }
+        
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+            
+            setTimeout(() => {
+                statusEl.classList.remove(type);
+            }, 3000);
+        }
+        
+        // Initialize on page load
+        window.addEventListener('load', () => {
+            displayGameUrl();
+            checkServerConnection();
+            
+            // Check server connection every 10 seconds
+            setInterval(checkServerConnection, 10000);
+        });
+    </script>
+</body>
+</html>

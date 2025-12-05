@@ -7,14 +7,36 @@ package com.example.server;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println("Initializing Trivia Server...");
+        System.out.println("🎮 Initializing Trivia Server...");
         
         // 1. Load Questions
         QuestionManager qm = new QuestionManager();
-        System.out.println("Questions loaded: " + qm.getQuestions().size());
+        System.out.println("📚 Questions loaded: " + qm.getQuestions().size());
         
-        // 2. Start Network
-        ServerNetworkManager server = new ServerNetworkManager();
+        // 2. Start WebSocket Server (for HTML/Web clients)
+        final TriviaWebSocketServer webSocketServer = new TriviaWebSocketServer(qm);
+        new Thread(() -> {
+            webSocketServer.start();
+        }).start();
+        
+        // 3. Start Socket Network (for Java clients)
+        final ServerNetworkManager server = new ServerNetworkManager();
+        
+        // Add shutdown hook for graceful termination
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("\n🛑 Shutdown signal received...");
+            try {
+                webSocketServer.stop(1000);
+            } catch (Exception e) {
+                System.err.println("Error stopping WebSocket server: " + e.getMessage());
+            }
+            server.shutdown();
+        }));
+        
+        System.out.println("🌐 Starting servers...");
+        System.out.println("   - Socket Server (Java clients): Port 12345");
+        System.out.println("   - WebSocket Server (HTML clients): Port 8081");
+        System.out.println("   - Max concurrent connections: 20 per server");
         server.startServer();
     }
 }

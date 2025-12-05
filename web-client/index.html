@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Trivia Game - Web Client</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .status.info {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .status.success {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+        
+        .status.error {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+        
+        .status.warning {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        #lobby, #game {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .room-list {
+            margin-top: 20px;
+        }
+        
+        .room-item {
+            background: #f5f5f5;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideIn 0.3s ease;
+            transition: all 0.3s;
+        }
+        
+        .room-item:hover {
+            background: #e8e8e8;
+            transform: translateX(5px);
+        }
+        
+        .room-item button {
+            width: auto;
+            padding: 8px 20px;
+        }
+        
+        .question-container {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .question-text {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option-btn {
+            padding: 15px;
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            border: 2px solid #1565C0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            text-align: left;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+            color: white;
+            font-weight: 500;
+        }
+        
+        .option-btn:hover:not(.disabled) {
+            border-color: #0D47A1;
+            background: linear-gradient(135deg, #42A5F5 0%, #2196F3 100%);
+            transform: translateX(8px);
+            box-shadow: 0 6px 15px rgba(33, 150, 243, 0.5);
+        }
+        
+        .option-btn.selected {
+            border-color: #FFD700;
+            background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.6);
+            font-weight: 600;
+        }
+        
+        .option-btn.disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .option-btn.correct {
+            border-color: #2E7D32;
+            background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
+            animation: pulse 0.5s ease;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .option-btn.incorrect {
+            border-color: #C62828;
+            background: linear-gradient(135deg, #EF5350 0%, #E53935 100%);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .spin {
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        
+        .score-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s ease;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Screen -->
+        <div id="login">
+            <h1>🎮 Trivia Game</h1>
+            <p class="subtitle">Web Client</p>
+            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="serverHost">Server Host</label>
+                <input type="text" id="serverHost" value="localhost" placeholder="localhost">
+            </div>
+            
+            <div class="form-group">
+                <label for="serverPort">Server Port</label>
+                <input type="number" id="serverPort" value="8081" placeholder="8081">
+            </div>
+            
+            <button id="loginBtn" onclick="connect()">Connect & Login</button>
+            
+            <div id="status" class="status hidden"></div>
+        </div>
+        
+        <!-- Lobby Screen -->
+        <div id="lobby">
+            <h1>🎮 Game Lobby</h1>
+            <p class="subtitle">Welcome, <span id="welcomeUser"></span>!</p>
+            
+            <button onclick="createRoom()">Create New Room</button>
+            
+            <div class="room-list" id="roomList">
+                <p style="text-align: center; color: #666;">Loading rooms...</p>
+            </div>
+            
+            <div id="lobbyStatus" class="status hidden"></div>
+        </div>
+        
+        <!-- Game Screen -->
+        <div id="game">
+            <h1>🎮 Playing Game</h1>
+            
+            <div class="score-display" id="scoreDisplay">
+                Score: 0
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-text" id="questionText">Loading question...</div>
+                
+                <div class="options" id="optionsContainer">
+                    <!-- Options will be dynamically added -->
+                </div>
+            </div>
+            
+            <button id="submitAnswer" onclick="submitAnswer()">Submit Answer</button>
+            
+            <div id="gameStatus" class="status hidden"></div>
+        </div>
+    </div>
+
+    <script>
+        let ws = null;
+        let currentUsername = '';
+        let selectedAnswer = null;
+        let currentScore = 0;
+        let isAnswering = false;
+        
+        function showStatus(message, type = 'info', elementId = 'status') {
+            const statusEl = document.getElementById(elementId);
+            statusEl.textContent = message;
+            statusEl.className = 'status ' + type;
+            statusEl.classList.remove('hidden');
+        }
+        
+        function hideStatus(elementId = 'status') {
+            const statusEl = document.getElementById(elementId);
+            statusEl.classList.add('hidden');
+        }
+        
+        function showScreen(screenId) {
+            const screens = ['login', 'lobby', 'game'];
+            screens.forEach(id => {
+                const el = document.getElementById(id);
+                if (id === screenId) {
+                    el.style.display = 'block';
+                    // Trigger reflow for animation
+                    el.offsetHeight;
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+        }
+        
+        function connect() {
+            const username = document.getElementById('username').value.trim();
+            const host = document.getElementById('serverHost').value.trim();
+            const port = document.getElementById('serverPort').value.trim();
+            
+            if (!username) {
+                showStatus('Please enter a username', 'error');
+                return;
+            }
+            
+            currentUsername = username;
+            
+            showStatus('Connecting to server...', 'info');
+            document.getElementById('loginBtn').disabled = true;
+            
+            try {
+                const wsUrl = `ws://${host}:${port}`;
+                ws = new WebSocket(wsUrl);
+                
+                ws.onopen = () => {
+                    console.log('Connected to server');
+                    showStatus('Connected! Logging in...', 'success');
+                    
+                    // Send login request
+                    const loginMsg = {
+                        type: 'LOGIN_REQUEST',
+                        content: username,
+                        senderId: username
+                    };
+                    ws.send(JSON.stringify(loginMsg));
+                };
+                
+                ws.onmessage = (event) => {
+                    try {
+                        const message = JSON.parse(event.data);
+                        handleMessage(message);
+                    } catch (e) {
+                        console.error('Error parsing message:', e);
+                    }
+                };
+                
+                ws.onerror = (error) => {
+                    console.error('WebSocket error:', error);
+                    showStatus('Connection error', 'error');
+                    document.getElementById('loginBtn').disabled = false;
+                };
+                
+                ws.onclose = () => {
+                    console.log('Disconnected from server');
+                    showStatus('Disconnected from server', 'warning');
+                    document.getElementById('loginBtn').disabled = false;
+                };
+                
+            } catch (e) {
+                showStatus('Failed to connect: ' + e.message, 'error');
+                document.getElementById('loginBtn').disabled = false;
+            }
+        }
+        
+        function handleMessage(message) {
+            console.log('Received:', message);
+            
+            switch (message.type) {
+                case 'LOGIN_SUCCESS':
+                    showStatus('Login successful!', 'success');
+                    document.getElementById('welcomeUser').textContent = currentUsername;
+                    setTimeout(() => {
+                        showScreen('lobby');
+                    }, 1000);
+                    break;
+                    
+                case 'LOGIN_FAILURE':
+                    showStatus('Login failed: ' + message.content, 'error');
+                    document.getElementById('loginBtn').disabled = false;
+                    break;
+                    
+                case 'ROOM_LIST_UPDATE':
+                    updateRoomList(message.content);
+                    break;
+                    
+                case 'GAME_START':
+                    showScreen('game');
+                    break;
+                    
+                case 'NEW_QUESTION':
+                    displayQuestion(message.content);
+                    break;
+                    
+                case 'ROUND_RESULT':
+                    if (typeof message.content === 'object' && message.content.results) {
+                        showRoundResults(message.content);
+                    } else {
+                        showGameStatus('Answer submitted!', 'info');
+                    }
+                    break;
+                    
+                case 'GAME_OVER':
+                    showGameOver(message.content);
+                    break;
+                    
+                case 'ERROR':
+                    showStatus('Error: ' + message.content, 'error');
+                    break;
+                    
+                default:
+                    console.log('Unhandled message type:', message.type);
+            }
+        }
+        
+        function createRoom() {
+            const roomName = prompt('Enter room name:');
+            if (roomName) {
+                const msg = {
+                    type: 'CREATE_ROOM',
+                    content: roomName,
+                    senderId: currentUsername
+                };
+                ws.send(JSON.stringify(msg));
+            }
+        }
+        
+        function joinRoom(roomId) {
+            const msg = {
+                type: 'JOIN_ROOM',
+                content: roomId,
+                senderId: currentUsername
+            };
+            ws.send(JSON.stringify(msg));
+        }
+        
+        function updateRoomList(rooms) {
+            const container = document.getElementById('roomList');
+            container.innerHTML = '';
+            
+            if (!rooms || rooms.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666;">No active rooms</p>';
+                return;
+            }
+            
+            rooms.forEach(room => {
+                const div = document.createElement('div');
+                div.className = 'room-item';
+                div.innerHTML = `
+                    <div>
+                        <strong>${room.name}</strong><br>
+                        <small>${room.players} players</small>
+                    </div>
+                    <button onclick="joinRoom('${room.id}')">Join</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        function displayQuestion(questionData) {
+            const questionNum = questionData.questionNumber || 1;
+            const totalQ = questionData.totalQuestions || 10;
+            const category = questionData.category || '';
+            
+            // Update progress bar
+            const progress = (questionNum / totalQ) * 100;
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = progress + '%';
+            
+            // Update score display
+            document.getElementById('scoreDisplay').innerHTML = `
+                Score: ${currentScore} | Question ${questionNum}/${totalQ}
+            `;
+            
+            // Display question with animation
+            const questionText = document.getElementById('questionText');
+            questionText.style.opacity = '0';
+            
+            setTimeout(() => {
+                questionText.innerHTML = `
+                    <div style="margin-bottom: 15px; color: #667eea; font-size: 0.9em; font-weight: 600;">
+                        <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                              color: white; padding: 5px 12px; border-radius: 20px;">
+                            Question ${questionNum}/${totalQ}
+                        </span>
+                        ${category ? `<span style="margin-left: 10px; color: #666;">📚 ${category}</span>` : ''}
+                    </div>
+                    <div style="font-size: 1.1em; font-weight: 500;">${questionData.question}</div>
+                `;
+                questionText.style.opacity = '1';
+            }, 100);
+            
+            // Display options with staggered animation
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '<div class="loader"></div>';
+            
+            setTimeout(() => {
+                container.innerHTML = '';
+                selectedAnswer = null;
+                isAnswering = false;
+                document.getElementById('submitAnswer').disabled = true;
+                document.getElementById('submitAnswer').textContent = 'Select an answer';
+                
+                questionData.options.forEach((option, index) => {
+                    setTimeout(() => {
+                        const btn = document.createElement('button');
+                        btn.className = 'option-btn';
+                        btn.textContent = option;
+                        btn.onclick = () => selectOption(index, btn);
+                        btn.style.animationDelay = `${index * 0.1}s`;
+                        container.appendChild(btn);
+                    }, index * 100);
+                });
+            }, 300);
+        }
+        
+        function selectOption(index, btnElement) {
+            if (isAnswering) return; // Prevent multiple selections
+            
+            selectedAnswer = index;
+            
+            // Remove previous selection
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+                btn.style.transform = 'scale(1)';
+            });
+            
+            // Highlight selected option with animation
+            btnElement.classList.add('selected');
+            btnElement.style.transform = 'scale(1.05)';
+            
+            // Enable submit button
+            const submitBtn = document.getElementById('submitAnswer');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Answer ✓';
+            submitBtn.classList.add('pulse');
+            
+            setTimeout(() => submitBtn.classList.remove('pulse'), 600);
+        }
+        
+        function submitAnswer() {
+            if (selectedAnswer === null) {
+                showGameStatus('Please select an answer', 'warning', 'gameStatus');
+                return;
+            }
+            
+            if (isAnswering) return; // Prevent double submission
+            isAnswering = true;
+            
+            // Disable all option buttons
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.add('disabled');
+                btn.onclick = null;
+            });
+            
+            // Disable submit button with loading state
+            const submitBtn = document.getElementById('submitAnswer');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spin">⏳</span> Submitting...';
+            
+            const msg = {
+                type: 'SUBMIT_ANSWER',
+                content: selectedAnswer,
+                senderId: currentUsername
+            };
+            ws.send(JSON.stringify(msg));
+            
+            showGameStatus('Answer submitted! Waiting for other players...', 'info', 'gameStatus');
+        }
+        
+        function showGameStatus(message, type) {
+            showStatus(message, type, 'gameStatus');
+        }
+        
+        function showRoundResults(data) {
+            const results = data.results;
+            const scores = data.scores;
+            const correctAnswer = data.correctAnswer;
+            
+            // Update current score
+            const oldScore = currentScore;
+            currentScore = scores[currentUsername] || 0;
+            
+            // Show if answer was correct with visual feedback
+            const wasCorrect = results[currentUsername];
+            
+            // Highlight correct/incorrect answer on buttons
+            const optionButtons = document.querySelectorAll('.option-btn');
+            optionButtons.forEach((btn, index) => {
+                if (index === correctAnswer) {
+                    btn.classList.add('correct');
+                } else if (index === selectedAnswer && !wasCorrect) {
+                    btn.classList.add('incorrect');
+                }
+            });
+            
+            // Animate score change
+            if (wasCorrect) {
+                const scoreDisplay = document.getElementById('scoreDisplay');
+                const originalText = scoreDisplay.textContent;
+                scoreDisplay.textContent = `+10 points! 🎉`;
+                scoreDisplay.classList.add('pulse');
+                
+                setTimeout(() => {
+                    scoreDisplay.classList.remove('pulse');
+                    scoreDisplay.innerHTML = `Score: ${currentScore} | Question ${data.questionNumber || ''}/${data.totalQuestions || 10}`;
+                }, 1500);
+                
+                showGameStatus('✅ Correct! Well done!', 'success');
+            } else {
+                showGameStatus('❌ Incorrect. The correct answer is highlighted in green.', 'error');
+            }
+            
+            // Show all player scores after a delay
+            setTimeout(() => {
+                let scoreText = '📊 Current Standings: ';
+                const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+                sortedScores.forEach(([player, score], index) => {
+                    const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '•';
+                    scoreText += `${medal} ${player}: ${score}  `;
+                });
+                showGameStatus(scoreText, 'info');
+            }, 2500);
+        }
+        
+        function showGameOver(data) {
+            const finalScores = data.finalScores;
+            const winner = data.winner;
+            
+            // Hide game elements, show results
+            document.getElementById('optionsContainer').style.display = 'none';
+            document.getElementById('submitAnswer').style.display = 'none';
+            document.getElementById('progressBar').style.display = 'none';
+            
+            // Create game over display
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.style.fontSize = '1.2em';
+            scoreDisplay.style.padding = '30px';
+            scoreDisplay.style.maxWidth = '600px';
+            scoreDisplay.style.margin = '0 auto';
+            
+            let message = `<div style="text-align: center;">
+                <div style="font-size: 2em; margin-bottom: 20px;" class="pulse">🏆</div>
+                <h2 style="color: #667eea; margin-bottom: 20px;">Game Over!</h2>
+                <div style="font-size: 1.3em; margin-bottom: 30px; color: #764ba2;">
+                    👑 Winner: <strong>${winner}</strong>
+                </div>
+                <h3 style="margin-bottom: 15px;">Final Standings:</h3>
+                <div style="text-align: left; display: inline-block;">`;
+            
+            // Sort scores
+            const sortedScores = Object.entries(finalScores)
+                .sort((a, b) => b[1] - a[1]);
+            
+            sortedScores.forEach(([player, score], index) => {
+                const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '👤';
+                const highlight = player === currentUsername ? 
+                    'style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px 15px; border-radius: 10px; margin: 5px 0; display: block;"' : 
+                    'style="padding: 8px 15px; margin: 5px 0; display: block;"';
+                message += `<span ${highlight}>${medal} ${player}: <strong>${score} points</strong></span>`;
+            });
+            
+            message += `</div></div>`;
+            
+            const questionText = document.getElementById('questionText');
+            questionText.innerHTML = message;
+            questionText.style.opacity = '0';
+            setTimeout(() => questionText.style.opacity = '1', 100);
+            
+            // Update score display with play again button
+            setTimeout(() => {
+                scoreDisplay.innerHTML = `
+                    <button onclick="location.reload()" 
+                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                               color: white; padding: 15px 40px; border: none; 
+                               border-radius: 30px; font-size: 1.1em; cursor: pointer;
+                               box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                               transition: all 0.3s ease;"
+                        onmouseover="this.style.transform='translateY(-2px) scale(1.05)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)';"
+                        onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';">
+                        🎮 Play Again
+                    </button>
+                `;
+            }, 3000);
+            
+            hideStatus('gameStatus');
+        }
+        
+        // Handle Enter key for login
+        document.getElementById('username').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') connect();
+        });
+        document.getElementById('serverHost').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') connect();
+        });
+        document.getElementById('serverPort').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') connect();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Gradle build caches and outputs
+**/.gradle/
+**/build/
+
+# Compiled artifacts
+**/bin/
+**/*.class
+
+# IDE/editor
+.vscode/
